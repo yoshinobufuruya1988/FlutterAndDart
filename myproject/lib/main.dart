@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myproject/widgets/Button.dart';
 
 void main() {
   runApp(const App());
@@ -70,25 +71,18 @@ class App extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Row(
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(45),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 50,
-                      ),
-                      child: Text(
-                        'Transfer',
-                        style: TextStyle(
-                          fontSize: 22,
-                        ),
-                      ),
-                    ),
+                  Button(
+                    text: "Transfer",
+                    bgColor: Colors.amber,
+                    txtColor: Colors.black,
+                  ),
+                  Button(
+                    text: "Request",
+                    bgColor: Color(0xFF1F2123),
+                    txtColor: Colors.white,
                   ),
                 ],
               ),
