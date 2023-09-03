@@ -29,6 +29,13 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+            color: Colors.red,
+          ),
+        ),
+      ),
       home: Scaffold(
         backgroundColor: const Color(0xFF181818),
         body: SingleChildScrollView(
@@ -46,14 +53,7 @@ class _AppState extends State<App> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Click Count',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        const MyTitle(),
                         Text(
                           "$count",
                           style: TextStyle(
@@ -167,6 +167,24 @@ class _AppState extends State<App> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class MyTitle extends StatelessWidget {
+  const MyTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'My Large Title',
+      style: TextStyle(
+        color: Theme.of(context).textTheme.titleLarge!.color,
+        fontSize: 28,
+        fontWeight: FontWeight.w600,
       ),
     );
   }
