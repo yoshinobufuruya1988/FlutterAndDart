@@ -11,8 +11,18 @@ void main() {
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  int count = 0;
+
+  void onClicked() {
+    count = count + 1;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +39,13 @@ class App extends StatelessWidget {
                   height: 50,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text(
-                          'Hey sireana',
+                          'Click Count',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 28,
@@ -43,12 +53,19 @@ class App extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "hello man",
+                          "$count",
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.8),
                             fontSize: 18,
                           ),
-                        )
+                        ),
+                        IconButton(
+                          onPressed: onClicked,
+                          iconSize: 40,
+                          icon: const Icon(
+                            Icons.add_box_rounded,
+                          ),
+                        ),
                       ],
                     )
                   ],
