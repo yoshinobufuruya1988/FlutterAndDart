@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:myproject/widgets/Button.dart';
 import 'package:myproject/widgets/currency_card.dart';
+import 'package:myproject/widgets/currency_card_with_order.dart';
 
 void main() {
   runApp(const App());
@@ -119,38 +120,29 @@ class App extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const CurrencyCard(
+                const CurrencyCardWithOrder(
                   name: 'EUR',
                   code: 'EUR',
                   amount: '3923',
                   icon: Icons.euro_rounded,
                   isInverted: false,
+                  order: 0,
                 ),
-                Transform.translate(
-                  offset: const Offset(
-                    0,
-                    -30,
-                  ),
-                  child: const CurrencyCard(
-                    name: 'USD',
-                    code: 'USD',
-                    amount: '3923',
-                    icon: Icons.usb_rounded,
-                    isInverted: true,
-                  ),
+                const CurrencyCardWithOrder(
+                  name: 'USD',
+                  code: 'USD',
+                  amount: '3923',
+                  icon: Icons.usb_rounded,
+                  isInverted: true,
+                  order: 1,
                 ),
-                Transform.translate(
-                  offset: const Offset(
-                    0,
-                    -60,
-                  ),
-                  child: const CurrencyCard(
-                    name: 'BIT',
-                    code: 'BIT',
-                    amount: '3923',
-                    icon: Icons.currency_bitcoin_rounded,
-                    isInverted: false,
-                  ),
+                const CurrencyCardWithOrder(
+                  name: 'USD',
+                  code: 'USD',
+                  amount: '3923',
+                  icon: Icons.usb_rounded,
+                  isInverted: false,
+                  order: 2,
                 ),
               ],
             ),
