@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,6 +11,21 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final Color _backgroundColor = const Color(0xFFE7626C);
+  int totalSeconds = 1500;
+  late Timer timer;
+
+  void onTick(Timer timer) {
+    setState(() {
+      totalSeconds = totalSeconds - 1;
+    });
+  }
+
+  void onStartPressed() {
+    timer = Timer.periodic(
+      const Duration(seconds: 1),
+      onTick,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               alignment: Alignment.center,
               color: Colors.red,
-              child: const Text(
-                'test',
+              child: Text(
+                '$totalSeconds',
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 100,
+                    fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -34,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: IconButton(
                   iconSize: 150,
                   color: const Color(0xFFF4EDDB),
-                  onPressed: () {},
+                  onPressed: onStartPressed,
                   icon: const Icon(
                     Icons.play_circle_outline_outlined,
                   ),
@@ -48,8 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Expanded(
                   child: Container(
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFF4EDDB),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF4EDDB),
+                      borderRadius: BorderRadius.circular(100),
                     ),
                     child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
