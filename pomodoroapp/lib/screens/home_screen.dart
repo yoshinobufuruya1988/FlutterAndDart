@@ -11,14 +11,24 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final Color _backgroundColor = const Color(0xFFE7626C);
-  int totalSeconds = 1500;
+  int totalSeconds = 10;
   bool isRunning = false;
+  int totalPomodoros = 0;
   late Timer timer;
 
   void onTick(Timer timer) {
-    setState(() {
-      totalSeconds = totalSeconds - 1;
-    });
+    if (totalSeconds == 0) {
+      setState(() {
+        totalPomodoros = totalPomodoros + 1;
+        isRunning = false;
+        totalSeconds = 1500;
+      });
+      timer.cancel();
+    } else {
+      setState(() {
+        totalSeconds = totalSeconds - 1;
+      });
+    }
   }
 
   void onStartPressed() {
@@ -38,6 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  String format(int seconds) {
+    var duration = Duration(seconds: seconds);
+    return (duration.toString().split(".").first.substring(2, 7));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.center,
               color: Colors.red,
               child: Text(
-                '$totalSeconds',
+                format(totalSeconds),
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 100,
@@ -86,10 +101,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: const Color(0xFFF4EDDB),
                       borderRadius: BorderRadius.circular(100),
                     ),
-                    child: const Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           'Pomodors',
                           style: TextStyle(
                             fontSize: 20,
@@ -97,8 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Text(
-                          '0',
-                          style: TextStyle(
+                          '$totalPomodoros',
+                          style: const TextStyle(
                             fontSize: 58,
                             fontWeight: FontWeight.w600,
                           ),
