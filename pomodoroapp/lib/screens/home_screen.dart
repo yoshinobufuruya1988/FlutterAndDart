@@ -12,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final Color _backgroundColor = const Color(0xFFE7626C);
   int totalSeconds = 1500;
+  bool isRunning = false;
   late Timer timer;
 
   void onTick(Timer timer) {
@@ -25,12 +26,22 @@ class _HomeScreenState extends State<HomeScreen> {
       const Duration(seconds: 1),
       onTick,
     );
+    setState(() {
+      isRunning = true;
+    });
+  }
+
+  void onPausePressed() {
+    timer.cancel();
+    setState(() {
+      isRunning = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.red,
       body: Column(
         children: [
           Flexible(
@@ -55,9 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: IconButton(
                   iconSize: 150,
                   color: const Color(0xFFF4EDDB),
-                  onPressed: onStartPressed,
-                  icon: const Icon(
-                    Icons.play_circle_outline_outlined,
+                  onPressed: isRunning ? onPausePressed : onStartPressed,
+                  icon: Icon(
+                    isRunning
+                        ? Icons.pause_circle_outline
+                        : Icons.play_circle_outline_outlined,
                   ),
                 ),
               ),
