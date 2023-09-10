@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:webtoon/models/webtoon_model.dart';
 
@@ -18,6 +17,9 @@ class ApiService {
       for (var webtoon in webtoons) {
         webtoonInstances.add(WebtoonModel.fromJson(webtoon));
       }
+
+      print(webtoonInstances);
+
       return webtoonInstances;
     }
 
